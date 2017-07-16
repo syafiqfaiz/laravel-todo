@@ -8,7 +8,17 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    To do list
+                    Create new todo list <a href="{{ route('list.create') }}">here</a>
+
+                    @if (!empty($todos))
+                        <h1>Your todo list</h1>
+                        <ul>
+                            @foreach($todos as $todo)
+                                <li>{{$todo->todo}}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+
                 </div>
             </div>
         </div>

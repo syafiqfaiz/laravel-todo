@@ -30,6 +30,6 @@ class User extends Authenticatable
 
     public function todo()
     {
-        return $this->hasMany(ToDo::class);
+        return $this->hasMany(\App\Models\Todo::class);
     }
 }

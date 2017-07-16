@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Todo;
+use App\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class ToDoController extends Controller
@@ -13,7 +16,9 @@ class ToDoController extends Controller
      */
     public function index()
     {
-        return view('todos.index');
+        $todos = Todo::where('user_id', Auth::user()->id)
+                ->get();
+        return view('todos.index', compact('todos'));
     }
 
     /**
@@ -23,7 +28,7 @@ class ToDoController extends Controller
      */
     public function create()
     {
-        //
+        return view('todos.create');
     }
 
     /**
@@ -34,7 +39,16 @@ class ToDoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        // $todo = $user -> todo() -> create([
+        //         'todo' => $request->todo
+        //     ]);
+        $todo = Todo::create([
+            'todo' => $request->todo,
+            'user_id' => $user->id
+            ]);
+        
+        return redirect('list');
     }
 
     /**

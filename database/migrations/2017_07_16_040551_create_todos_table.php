@@ -17,6 +17,7 @@ class CreateTodosTable extends Migration
             $table->increments('id');
             $table->string('todo');
             $table->timestamps();
+            $table->integer('user_id')->index();
         });
     }
 
